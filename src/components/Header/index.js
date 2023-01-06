@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom'
 import {RiMoonFill, RiSunLine} from 'react-icons/ri'
 import Cookies from 'js-cookie'
 import NxtWatchContext from '../../context/index'
+import {HeaderContainer, ProfileImg, MenuContainer} from './styledComponents'
 
 class Header extends Component {
   render() {
@@ -18,7 +19,7 @@ class Header extends Component {
           const onChangeMode = () => value.changeMode()
           return (
             <nav className="nav-header">
-              <div className="nav-content">
+              <HeaderContainer className="nav-content">
                 <Link to="/">
                   {darkMode ? (
                     <img
@@ -32,24 +33,39 @@ class Header extends Component {
                     />
                   )}
                 </Link>
-                <div>
-                  <button type="button" onClick={onChangeMode}>
-                    {darkMode ? <RiSunLine /> : <RiMoonFill />}
-                  </button>
-                  <img
-                    src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
-                    alt="profile"
-                  />
-                  <button
-                    type="button"
-                    className="logout-desktop-btn"
-                    onClick={onClickLogout}
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
-              <div className="nav-menu-mobile">
+                <MenuContainer>
+                  <div>
+                    <button type="button" onClick={onChangeMode}>
+                      {darkMode ? <RiSunLine /> : <RiMoonFill />}
+                    </button>
+                  </div>
+                  <div>
+                    <ProfileImg
+                      src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+                      alt="profile"
+                    />
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      className="logout-desktop-btn"
+                      onClick={onClickLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </MenuContainer>
+              </HeaderContainer>
+            </nav>
+          )
+        }}
+      </NxtWatchContext.Consumer>
+    )
+  }
+}
+export default withRouter(Header)
+
+/*  <div className="nav-menu-mobile">
                 <ul className="nav-menu-list-mobile">
                   <Link to="/">
                     <li className="nav-menu-item-mobile">
@@ -67,12 +83,4 @@ class Header extends Component {
                     </li>
                   </Link>
                 </ul>
-              </div>
-            </nav>
-          )
-        }}
-      </NxtWatchContext.Consumer>
-    )
-  }
-}
-export default withRouter(Header)
+              </div> */
