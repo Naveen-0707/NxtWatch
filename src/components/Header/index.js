@@ -19,7 +19,7 @@ class Header extends Component {
           const onChangeMode = () => value.changeMode()
           return (
             <nav className="nav-header">
-              <HeaderContainer className="nav-content">
+              <HeaderContainer darkMode={darkMode}>
                 <Link to="/">
                   {darkMode ? (
                     <img
@@ -64,23 +64,3 @@ class Header extends Component {
   }
 }
 export default withRouter(Header)
-
-/*  <div className="nav-menu-mobile">
-                <ul className="nav-menu-list-mobile">
-                  <Link to="/">
-                    <li className="nav-menu-item-mobile">
-                      {darkMode ? (
-                        <img
-                          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
-                          alt="website logo"
-                        />
-                      ) : (
-                        <img
-                          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                          alt="website logo"
-                        />
-                      )}
-                    </li>
-                  </Link>
-                </ul>
-              </div> */

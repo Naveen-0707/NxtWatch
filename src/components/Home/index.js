@@ -3,23 +3,28 @@ import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 import {BsSearch} from 'react-icons/bs'
+import {GrFormClose} from 'react-icons/gr'
 import Header from '../Header'
 import NxtWatchContext from '../../context/index'
 import SelectionMenu from '../SelectionMenu'
 import {
   MainContainer,
   ListContainer,
+  Head,
   BannerContainer,
   HomeContainer,
+  FailContainer,
   Img,
+  ImgFail,
 } from './styledComponent'
 import VideoItem from '../VideoItem'
 
 class Home extends Component {
   state = {
     searchInput: '',
+    banner: true,
     videosList: [],
-    isLoading: false,
+    apiStatus: 'initial',
   }
 
   componentDidMount() {
@@ -36,7 +41,7 @@ class Home extends Component {
 
   getVideos = async () => {
     this.setState({
-      isLoading: true,
+      apiStatus: 'loading',
     })
     const jwtToken = Cookies.get('jwt_token')
     const {searchInput} = this.state
@@ -47,8 +52,8 @@ class Home extends Component {
       },
       method: 'GET',
     }
-    const response = await fetch(apiUrl, options)
-    if (response.ok) {
+    try {
+      const response = await fetch(apiUrl, options)
       const fetchedData = await response.json()
 
       const updatedData = fetchedData.videos.map(video => ({
@@ -62,24 +67,121 @@ class Home extends Component {
       console.log(updatedData)
       this.setState({
         videosList: updatedData,
-        isLoading: false,
+        apiStatus: 'success',
       })
+    } catch (error) {
+      console.log(error)
+      this.setState({apiStatus: 'failure'})
     }
   }
 
+  onRetry = () => {
+    this.getVideos()
+  }
+
+  renderData = () => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case 'success':
+        return this.renderVideos()
+      case 'failure':
+        return this.renderFailureView()
+      case 'loading':
+        return this.renderLoadingView()
+      default:
+        return null
+    }
+  }
+
+  renderFailureView = () => (
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {darkMode} = value
+        if (darkMode) {
+          return (
+            <FailContainer darkMode={darkMode}>
+              <ImgFail
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
+                alt="website logo"
+              />
+              <Head>Oops! Something Went Wrong</Head>
+              <p>
+                We are having some trouble to complete your request. Please try
+                again.
+              </p>
+              <button type="button" onClick={this.onRetry}>
+                Retry
+              </button>
+            </FailContainer>
+          )
+        }
+        return (
+          <FailContainer darkMode={darkMode}>
+            <ImgFail
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+              alt="website logo"
+            />
+            <Head>Oops! Something Went Wrong</Head>
+            <p>
+              We are having some trouble to complete your request. Please try
+              again.
+            </p>
+            <button type="button" onClick={this.onRetry}>
+              Retry
+            </button>
+          </FailContainer>
+        )
+      }}
+    </NxtWatchContext.Consumer>
+  )
+
+  bannerClose = () => {
+    this.setState({
+      banner: false,
+    })
+  }
+
+  renderLoadingView = () => (
+    <div className="products-loader-container">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
+
   renderVideos = () => {
     const {videosList} = this.state
+    if (videosList.length > 0) {
+      return (
+        <ListContainer>
+          {videosList.map(each => (
+            <VideoItem key={each.id} videoData={each} />
+          ))}
+        </ListContainer>
+      )
+    }
     return (
-      <ListContainer>
-        {videosList.map(each => (
-          <VideoItem key={each.id} videoData={each} />
-        ))}
-      </ListContainer>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {darkMode} = value
+          return (
+            <FailContainer darkMode={darkMode}>
+              <ImgFail
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+                alt="no videos"
+              />
+              <Head>No Search results found</Head>
+              <p>Try different key words or remove search filter</p>
+              <button type="button" onClick={this.onRetry}>
+                Retry
+              </button>
+            </FailContainer>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 
   render() {
-    const {isLoading} = this.state
+    const {banner, searchInput} = this.state
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken === undefined) {
       return <Redirect to="/login" />
@@ -92,44 +194,42 @@ class Home extends Component {
           return (
             <>
               <Header />
-              <MainContainer>
+              <MainContainer darkMode={darkMode}>
                 <SelectionMenu />
-                <HomeContainer>
-                  <BannerContainer>
-                    <div>
-                      {darkMode ? (
-                        <Img
-                          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
-                          alt="website logo"
-                        />
-                      ) : (
-                        <Img
-                          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                          alt="website logo"
-                        />
-                      )}
-                      <p>Buy Nxt Watch Premium prepaid plans with UPI</p>
-                      <button type="button">GET IT NOW</button>
-                    </div>
-                  </BannerContainer>
+                <HomeContainer darkMode={darkMode}>
+                  {banner && (
+                    <BannerContainer darkMode={darkMode}>
+                      <div>
+                        {darkMode ? (
+                          <Img
+                            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
+                            alt="website logo"
+                          />
+                        ) : (
+                          <Img
+                            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+                            alt="website logo"
+                          />
+                        )}
+                        <GrFormClose onClick={this.bannerClose} />
+                        <p>Buy Nxt Watch Premium prepaid plans with UPI</p>
+                        <button type="button">GET IT NOW</button>
+                      </div>
+                    </BannerContainer>
+                  )}
+
                   <div>
-                    <input type="search" onChange={this.onSearchChange} />
+                    <input
+                      value={searchInput}
+                      type="search"
+                      onChange={this.onSearchChange}
+                      placeholder="Search"
+                    />
                     <button onClick={this.submitSearch} type="button">
                       <BsSearch />
                     </button>
                   </div>
-                  {isLoading ? (
-                    <div>
-                      <Loader
-                        type="ThreeDots"
-                        color="lightblue"
-                        height="50"
-                        width="50"
-                      />
-                    </div>
-                  ) : (
-                    this.renderVideos()
-                  )}
+                  {this.renderData()}
                 </HomeContainer>
               </MainContainer>
             </>
@@ -140,27 +240,3 @@ class Home extends Component {
   }
 }
 export default Home
-
-/* <div>
-              <div>
-                <h1>Clothes That Get YOU Noticed</h1>
-                <img
-                  src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-home-img.png"
-                  alt="dresses to be noticed"
-                />
-                <p>
-                  Fashion is part of the daily air and it does not quite help
-                  that it changes all the time. Clothes have always been a
-                  marker of the era and we are in a revolution. Your fashion
-                  makes you been seen and heard that way you are. So, celebrate
-                  the seasons new and exciting fashion in your own way.
-                </p>
-                <Link to="/videos">
-                  <button type="button">Shop Now</button>
-                </Link>
-              </div>
-              <img
-                src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-home-img.png"
-                alt="dresses to be noticed"
-              />
-            </div> */

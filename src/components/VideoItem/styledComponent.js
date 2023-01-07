@@ -6,12 +6,30 @@ export const DetailsContainer = styled.div`
   flex-direction: row;
 `
 export const ListItemContainer = styled.div`
-  background-color: #181818;
+  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
+  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
   width: 33%;
 `
 
 export const Img = styled.img`
-  width: 70%;
+  width: 20px;
+  @media (min-width: 400px) {
+    width: 60px;
+  }
+`
+
+export const Head = styled.h1`
+  font-size: 20px;
+  @media (min-width: 400px) {
+    font-size: 10px;
+  }
+`
+
+export const Para = styled.p`
+  font-size: 10px;
+  @media (min-width: 400px) {
+    font-size: 20px;
+  }
 `
 
 export const Thumbnail = styled.img`

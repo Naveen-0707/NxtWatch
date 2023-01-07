@@ -1,9 +1,11 @@
 import {formatDistanceToNow} from 'date-fns'
+import NxtWatchContext from '../../context/index'
 import {
   DetailsContainer,
   ListItemContainer,
   Img,
   ViewContainer,
+  Para,
   Thumbnail,
 } from './styledComponent'
 import './index.css'
@@ -16,25 +18,32 @@ const videoCard = props => {
     profileImageUrl: channel.profile_image_url,
   }
   return (
-    <ListItemContainer>
-      <div>
-        <Thumbnail src={thumbnailUrl} alt="thumbnail" />
-      </div>
-      <DetailsContainer>
-        <div>
-          <Img src={modified.profileImageUrl} alt="profile" />
-        </div>
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {darkMode} = value
+        return (
+          <ListItemContainer darkMode={darkMode}>
+            <div>
+              <Thumbnail src={thumbnailUrl} alt="thumbnail" />
+            </div>
+            <DetailsContainer>
+              <div>
+                <Img src={modified.profileImageUrl} alt="profile" />
+              </div>
 
-        <div>
-          <p>{title}</p>
-          <p>{modified.name}</p>
-          <ViewContainer>
-            <p>{viewCount} views</p>
-            <p>{formatDistanceToNow(new Date(publishedAt))}</p>
-          </ViewContainer>
-        </div>
-      </DetailsContainer>
-    </ListItemContainer>
+              <div>
+                <Para>{title}</Para>
+                <Para>{modified.name}</Para>
+                <ViewContainer>
+                  <Para>{viewCount} views</Para>
+                  <Para>{formatDistanceToNow(new Date(publishedAt))}</Para>
+                </ViewContainer>
+              </div>
+            </DetailsContainer>
+          </ListItemContainer>
+        )
+      }}
+    </NxtWatchContext.Consumer>
   )
 }
 export default videoCard
