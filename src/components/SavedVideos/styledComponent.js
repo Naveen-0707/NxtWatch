@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const MainContainer = styled.div`
+  text-decoration: none;
   background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
   color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
   text-align: center;
@@ -11,13 +12,12 @@ export const MainContainer = styled.div`
   text-align: center;
   width: 100%;
 `
-
 export const BannerContainer = styled.div`
   text-align: start;
-  padding: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 10px;
   height: 20%;
   color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
   background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
@@ -45,8 +45,6 @@ export const ListContainer = styled.div`
   max-height: 75%;
   flex-direction: row;
   flex-wrap: wrap;
-  background-size: cover;
-  background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
 `
 export const DetailsContainer = styled.div`
   text-align: start;
@@ -56,19 +54,10 @@ export const DetailsContainer = styled.div`
 `
 
 export const ListItemContainer = styled.div`
-  padding: 10px;
+  padding: 30px;
   display: flex;
-  width: 100%;
-  flex-direction: row;
-  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
-`
-
-export const ItemContainer = styled.div`
-  padding: 10px;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
+  width: 25%;
+  flex-direction: column;
   color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
   background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
 `
@@ -78,11 +67,17 @@ export const ImgItem = styled.img`
 `
 
 export const Thumbnail = styled.img`
-  width: 400px;
+  width: 90%;
 `
 
 export const ViewContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+`
+export const Head = styled.h1`
+  font-size: 10px;
+  @media (min-width: 400px) {
+    font-size: 20px;
+  }
 `

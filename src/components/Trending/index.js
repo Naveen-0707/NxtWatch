@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import {AiFillFire} from 'react-icons/ai'
 import {formatDistanceToNow} from 'date-fns'
 import Loader from 'react-loader-spinner'
@@ -9,6 +9,7 @@ import NxtWatchContext from '../../context/index'
 import SelectionMenu from '../SelectionMenu'
 import {
   ListItemContainer,
+  ItemContainer,
   Thumbnail,
   DetailsContainer,
   ViewContainer,
@@ -137,30 +138,46 @@ class Trending extends Component {
       return (
         <ListContainer>
           {videosList.map(each => {
-            const {title, thumbnailUrl, channel, viewCount, publishedAt} = each
+            const {
+              title,
+              thumbnailUrl,
+              channel,
+              viewCount,
+              id,
+              publishedAt,
+            } = each
             const modified = {
               name: channel.name,
               profileImageUrl: channel.profile_image_url,
             }
             return (
-              <NxtWatchContext.Consumer>
+              <NxtWatchContext.Consumer key={id}>
                 {value => {
                   const {darkMode} = value
                   return (
                     <ListItemContainer darkMode={darkMode}>
-                      <div>
-                        <Thumbnail src={thumbnailUrl} alt="thumbnail" />
-                      </div>
-                      <DetailsContainer>
-                        <div>
-                          <p>{title}</p>
-                          <p>{modified.name}</p>
-                          <ViewContainer>
-                            <p>{viewCount} views</p>
-                            <p>{formatDistanceToNow(new Date(publishedAt))}</p>
-                          </ViewContainer>
-                        </div>
-                      </DetailsContainer>
+                      <Link
+                        style={{textDecoration: 'none'}}
+                        to={`/videos/${id}`}
+                      >
+                        <ItemContainer>
+                          <div>
+                            <Thumbnail src={thumbnailUrl} alt="thumbnail" />
+                          </div>
+                          <DetailsContainer>
+                            <div>
+                              <p>{title}</p>
+                              <p>{modified.name}</p>
+                              <ViewContainer>
+                                <p>{viewCount} views</p>
+                                <p>
+                                  {formatDistanceToNow(new Date(publishedAt))}
+                                </p>
+                              </ViewContainer>
+                            </div>
+                          </DetailsContainer>
+                        </ItemContainer>
+                      </Link>
                     </ListItemContainer>
                   )
                 }}

@@ -64,13 +64,11 @@ class Home extends Component {
         publishedAt: video.published_at,
         id: video.id,
       }))
-      console.log(updatedData)
       this.setState({
         videosList: updatedData,
         apiStatus: 'success',
       })
     } catch (error) {
-      console.log(error)
       this.setState({apiStatus: 'failure'})
     }
   }
@@ -190,7 +188,6 @@ class Home extends Component {
       <NxtWatchContext.Consumer>
         {value => {
           const {darkMode} = value
-          console.log(darkMode)
           return (
             <>
               <Header />

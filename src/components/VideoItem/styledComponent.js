@@ -19,6 +19,7 @@ export const Img = styled.img`
 `
 
 export const Head = styled.h1`
+  text-decoration: 'none';
   font-size: 20px;
   @media (min-width: 400px) {
     font-size: 10px;
@@ -26,6 +27,7 @@ export const Head = styled.h1`
 `
 
 export const Para = styled.p`
+  text-decoration: 'none';
   font-size: 10px;
   @media (min-width: 400px) {
     font-size: 20px;
@@ -43,6 +45,4 @@ export const ViewContainer = styled.div`
 `
 export const HomeContainer = styled.div`
   width: 100%;
-  background-size: cover;
-  background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
 `

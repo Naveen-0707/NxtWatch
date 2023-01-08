@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import {Component} from 'react'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 import {SiYoutubegaming} from 'react-icons/si'
 import Header from '../Header'
@@ -51,13 +51,11 @@ class Gaming extends Component {
         viewCount: video.view_count,
         id: video.id,
       }))
-      console.log(updatedData)
       this.setState({
         videosList: updatedData,
         apiStatus: 'success',
       })
     } catch (error) {
-      console.log(error)
       this.setState({apiStatus: 'failure'})
     }
   }
@@ -134,24 +132,31 @@ class Gaming extends Component {
       <ListContainer>
         {videosList.map(
           each => {
-            const {title, thumbnailUrl, viewCount} = each
+            const {title, thumbnailUrl, id, viewCount} = each
             return (
-              <NxtWatchContext.Consumer>
+              <NxtWatchContext.Consumer key={id}>
                 {value => {
                   const {darkMode} = value
                   return (
                     <ListItemContainer darkMode={darkMode}>
-                      <div>
-                        <Thumbnail src={thumbnailUrl} alt="thumbnail" />
-                      </div>
-                      <DetailsContainer>
+                      <Link
+                        style={{textDecoration: 'none'}}
+                        to={`/videos/${id}`}
+                      >
                         <div>
-                          <h4>{title}</h4>
-                          <ViewContainer>
-                            <p>{viewCount} views</p>
-                          </ViewContainer>
+                          <div>
+                            <Thumbnail src={thumbnailUrl} alt="thumbnail" />
+                          </div>
+                          <DetailsContainer>
+                            <div>
+                              <h4>{title}</h4>
+                              <ViewContainer>
+                                <p>{viewCount} Watching Worldwide</p>
+                              </ViewContainer>
+                            </div>
+                          </DetailsContainer>
                         </div>
-                      </DetailsContainer>
+                      </Link>
                     </ListItemContainer>
                   )
                 }}
@@ -173,7 +178,6 @@ class Gaming extends Component {
       <NxtWatchContext.Consumer>
         {value => {
           const {darkMode} = value
-          console.log(darkMode)
           return (
             <>
               <Header />

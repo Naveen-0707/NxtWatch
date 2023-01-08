@@ -8,11 +8,11 @@ import Gaming from './components/Gaming'
 import SavedVideos from './components/SavedVideos'
 import NotFound from './components/NotFound'
 
-import './App.css'
 import NxtWatchContext from './context'
+import videoItemDetails from './components/VideoItemDetails'
 
 class App extends Component {
-  state = {darkMode: false}
+  state = {darkMode: false, savedVideos: [], saved: false}
 
   changeMode = () => {
     this.setState(prevstate => ({
@@ -20,15 +20,43 @@ class App extends Component {
     }))
   }
 
+  onSave = videoData => {
+    const {savedVideos} = this.state
+    const list = savedVideos.filter(each => each.id === videoData.id)
+    console.log(list)
+    if (list.length === 0) {
+      this.setState(prevstate => ({
+        savedVideos: [...prevstate.savedVideos, videoData],
+        saved: true,
+      }))
+    } else {
+      const newList = savedVideos.filter(each => each.id !== videoData.id)
+      this.setState({savedVideos: newList, saved: false})
+    }
+  }
+
   render() {
-    const {darkMode} = this.state
+    const {darkMode, savedVideos, saved} = this.state
     return (
-      <NxtWatchContext.Provider value={{darkMode, changeMode: this.changeMode}}>
+      <NxtWatchContext.Provider
+        value={{
+          darkMode,
+          savedVideos,
+          changeMode: this.changeMode,
+          onSave: this.onSave,
+          saved,
+        }}
+      >
         <Switch>
           <Route exact path="/login" component={LoginForm} />
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/trending" component={Trending} />
           <ProtectedRoute exact path="/gaming" component={Gaming} />
+          <ProtectedRoute
+            exact
+            path="/videos/:id"
+            component={videoItemDetails}
+          />
           <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
           <Route component={NotFound} />
         </Switch>
