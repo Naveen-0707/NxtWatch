@@ -45,7 +45,7 @@ class SelectionMenu extends Component {
               </div>
 
               <div>
-                <h4>CONTACT US</h4>
+                <p>CONTACT US</p>
                 <LogosContainer>
                   <div>
                     <Logo
@@ -67,7 +67,7 @@ class SelectionMenu extends Component {
                   </div>
                 </LogosContainer>
                 <div>
-                  <p>Enjoy Now to see your channels and recommendations!</p>
+                  <p>Enjoy! Now to see your channels and recommendations!</p>
                 </div>
               </div>
             </MainContainer>

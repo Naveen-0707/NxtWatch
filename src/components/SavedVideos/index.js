@@ -9,6 +9,7 @@ import {
   ListItemContainer,
   ItemContainer,
   FailContainer,
+  MainCont,
   ImgFail,
   Head,
   Thumbnail,
@@ -77,7 +78,7 @@ class SavedVideos extends Component {
         {value => {
           const {darkMode} = value
           return (
-            <div data-testid="savedVideos">
+            <MainCont darkMode={darkMode} data-testid="savedVideos">
               <Header />
               <MainContainer darkMode={darkMode}>
                 <SelectionMenu />
@@ -89,7 +90,7 @@ class SavedVideos extends Component {
                   {this.renderVideos()}
                 </HomeContainer>
               </MainContainer>
-            </div>
+            </MainCont>
           )
         }}
       </NxtWatchContext.Consumer>

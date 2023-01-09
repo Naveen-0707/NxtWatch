@@ -10,6 +10,7 @@ import SelectionMenu from '../SelectionMenu'
 import {
   ListItemContainer,
   ItemContainer,
+  MainCont,
   Thumbnail,
   DetailsContainer,
   ViewContainer,
@@ -222,7 +223,7 @@ class Trending extends Component {
         {value => {
           const {darkMode} = value
           return (
-            <div data-testid="trending">
+            <MainCont darkMode={darkMode} data-testid="trending">
               <Header />
               <MainContainer darkMode={darkMode}>
                 <SelectionMenu />
@@ -234,7 +235,7 @@ class Trending extends Component {
                   {this.renderData()}
                 </HomeContainer>
               </MainContainer>
-            </div>
+            </MainCont>
           )
         }}
       </NxtWatchContext.Consumer>

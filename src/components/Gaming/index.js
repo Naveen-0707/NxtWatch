@@ -10,6 +10,7 @@ import {
   ListItemContainer,
   ItemContainer,
   Thumbnail,
+  MainCont,
   DetailsContainer,
   ViewContainer,
   BannerContainer,
@@ -131,44 +132,35 @@ class Gaming extends Component {
     const {videosList} = this.state
     return (
       <ListContainer>
-        {videosList.map(
-          each => {
-            const {title, thumbnailUrl, id, viewCount} = each
-            return (
-              <NxtWatchContext.Consumer key={id}>
-                {value => {
-                  const {darkMode} = value
-                  return (
-                    <ListItemContainer darkMode={darkMode}>
-                      <Link
-                        style={{textDecoration: 'none'}}
-                        to={`/videos/${id}`}
-                      >
-                        <ItemContainer darkMode={darkMode}>
+        {videosList.map(each => {
+          const {title, thumbnailUrl, id, viewCount} = each
+          return (
+            <NxtWatchContext.Consumer key={id}>
+              {value => {
+                const {darkMode} = value
+                return (
+                  <ListItemContainer darkMode={darkMode}>
+                    <Link style={{textDecoration: 'none'}} to={`/videos/${id}`}>
+                      <ItemContainer darkMode={darkMode}>
+                        <div>
+                          <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
+                        </div>
+                        <DetailsContainer>
                           <div>
-                            <Thumbnail
-                              src={thumbnailUrl}
-                              alt="video thumbnail"
-                            />
+                            <p>{title}</p>
+                            <ViewContainer>
+                              <p>{viewCount} Watching Worldwide</p>
+                            </ViewContainer>
                           </div>
-                          <DetailsContainer>
-                            <div>
-                              <h4>{title}</h4>
-                              <ViewContainer>
-                                <p>{viewCount} Watching Worldwide</p>
-                              </ViewContainer>
-                            </div>
-                          </DetailsContainer>
-                        </ItemContainer>
-                      </Link>
-                    </ListItemContainer>
-                  )
-                }}
-              </NxtWatchContext.Consumer>
-            )
-          },
-          //   <VideoItem key={each.id} videoData={each} />
-        )}
+                        </DetailsContainer>
+                      </ItemContainer>
+                    </Link>
+                  </ListItemContainer>
+                )
+              }}
+            </NxtWatchContext.Consumer>
+          )
+        })}
       </ListContainer>
     )
   }
@@ -183,11 +175,11 @@ class Gaming extends Component {
         {value => {
           const {darkMode} = value
           return (
-            <div data-testid="gaming">
+            <MainCont darkMode={darkMode} data-testid="gaming">
               <Header />
-              <MainContainer darkMode={darkMode}>
+              <MainContainer data-testid="gaming" darkMode={darkMode}>
                 <SelectionMenu />
-                <HomeContainer darkMode={darkMode}>
+                <HomeContainer data-testid="gaming" darkMode={darkMode}>
                   <BannerContainer data-testid="banner" darkMode={darkMode}>
                     <SiYoutubegaming />
                     <h1>Gaming</h1>
@@ -195,7 +187,7 @@ class Gaming extends Component {
                   {this.renderData()}
                 </HomeContainer>
               </MainContainer>
-            </div>
+            </MainCont>
           )
         }}
       </NxtWatchContext.Consumer>

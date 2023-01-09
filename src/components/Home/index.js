@@ -11,6 +11,7 @@ import {
   MainContainer,
   ListContainer,
   Head,
+  MainCont,
   BannerContainer,
   HomeContainer,
   FailContainer,
@@ -189,7 +190,7 @@ class Home extends Component {
         {value => {
           const {darkMode} = value
           return (
-            <div data-testid="home">
+            <MainCont darkMode={darkMode} data-testid="home">
               <Header />
               <MainContainer darkMode={darkMode}>
                 <SelectionMenu />
@@ -240,7 +241,7 @@ class Home extends Component {
                   {this.renderData()}
                 </HomeContainer>
               </MainContainer>
-            </div>
+            </MainCont>
           )
         }}
       </NxtWatchContext.Consumer>

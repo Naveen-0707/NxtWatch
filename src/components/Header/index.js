@@ -68,7 +68,7 @@ class Header extends Component {
                     >
                       {close => (
                         <PopContainer darkMode={darkMode}>
-                          <Para>Are you sure,you want to logout?</Para>
+                          <Para>Are you sure, you want to logout</Para>
                           <button
                             type="button"
                             className="close"

@@ -11,6 +11,10 @@ export const MainContainer = styled.div`
   flex-direction: row;
   text-align: center;
 `
+export const MainCont = styled.div`
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#ffffff')};
+  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
+`
 
 export const Img = styled.img`
   width: 10%;

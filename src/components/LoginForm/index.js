@@ -2,6 +2,7 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
 import NxtWatchContext from '../../context/index'
+import {CustomBtn} from './styledComponents'
 
 class LoginForm extends Component {
   state = {
@@ -131,7 +132,7 @@ class LoginForm extends Component {
                 />
                 <label htmlFor="showPassword">Show Password</label>
                 <br />
-                <button type="submit">Login</button>
+                <CustomBtn type="submit">Login</CustomBtn>
                 {showSubmitError && <p>*{errorMsg}</p>}
               </form>
             </div>

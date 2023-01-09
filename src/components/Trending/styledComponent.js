@@ -38,7 +38,7 @@ export const HomeContainer = styled.div`
   padding: 30px;
   background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
 `
-export const ListContainer = styled.div`
+export const ListContainer = styled.ul`
   display: flex;
   overflow-y: scroll;
   background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
@@ -54,8 +54,12 @@ export const DetailsContainer = styled.div`
   display: flex;
   flex-direction: row;
 `
+export const MainCont = styled.div`
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#ffffff')};
+  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
+`
 
-export const ListItemContainer = styled.div`
+export const ListItemContainer = styled.li`
   padding: 10px;
   display: flex;
   width: 100%;

@@ -12,6 +12,7 @@ import SelectionMenu from '../SelectionMenu'
 import {
   MainContainer,
   CustomBtnSave,
+  MainCont,
   ImgFail,
   Img,
   DetailsContainer,
@@ -257,24 +258,22 @@ class videoItemDetails extends Component {
 
   render() {
     return (
-      <div data-testid="videoItemDetails">
-        <NxtWatchContext.Consumer>
-          {value => {
-            const {darkMode} = value
-            return (
-              <>
-                <Header />
-                <MainContainer darkMode={darkMode}>
-                  <SelectionMenu />
-                  <HomeContainer darkMode={darkMode}>
-                    {this.rendervideoDetails()}
-                  </HomeContainer>
-                </MainContainer>
-              </>
-            )
-          }}
-        </NxtWatchContext.Consumer>
-      </div>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {darkMode} = value
+          return (
+            <MainCont darkMode={darkMode} data-testid="videoItemDetails">
+              <Header />
+              <MainContainer darkMode={darkMode}>
+                <SelectionMenu />
+                <HomeContainer darkMode={darkMode}>
+                  {this.rendervideoDetails()}
+                </HomeContainer>
+              </MainContainer>
+            </MainCont>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }

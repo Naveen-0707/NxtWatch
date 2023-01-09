@@ -11,6 +11,10 @@ export const MainContainer = styled.div`
   text-align: center;
   width: 100%;
 `
+export const MainCont = styled.div`
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#ffffff')};
+  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
+`
 export const BannerContainer = styled.div`
   text-align: start;
   display: flex;
@@ -37,7 +41,7 @@ export const HomeContainer = styled.div`
   padding: 30px;
   background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
 `
-export const ListContainer = styled.div`
+export const ListContainer = styled.ul`
   display: flex;
   overflow-y: scroll;
   background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
@@ -52,7 +56,7 @@ export const DetailsContainer = styled.div`
   flex-direction: row;
 `
 
-export const ListItemContainer = styled.div`
+export const ListItemContainer = styled.li`
   padding: 30px;
   display: flex;
   width: 25%;
