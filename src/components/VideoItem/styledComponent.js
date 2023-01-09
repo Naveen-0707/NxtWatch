@@ -46,3 +46,10 @@ export const ViewContainer = styled.div`
 export const HomeContainer = styled.div`
   width: 100%;
 `
+
+export const ItemContainer = styled.div`
+  padding: 10px;
+  width: 100%;
+  color: ${props => (props.darkMode ? '#f9f9f9' : '#181818')};
+  background-color: ${props => (props.darkMode ? '#181818' : '#f9f9f9')};
+`

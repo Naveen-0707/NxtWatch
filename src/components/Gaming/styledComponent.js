@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const MainContainer = styled.div`
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
-  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
+  color: ${props => (props.darkMode ? '#f9f9f9' : '#0f0f0f')};
   text-align: center;
   padding: 10px;
   height: 90vh;
@@ -18,14 +18,14 @@ export const BannerContainer = styled.div`
   align-items: center;
   padding: 10px;
   height: 20%;
-  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
+  color: ${props => (props.darkMode ? '#f9f9f9' : '#0f0f0f')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
 `
 export const Img = styled.img`
   width: 10%;
 `
 export const FailContainer = styled.div`
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
 `
 
 export const ImgFail = styled.img`
@@ -35,12 +35,12 @@ export const ImgFail = styled.img`
 export const HomeContainer = styled.div`
   width: 100%;
   padding: 30px;
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
 `
 export const ListContainer = styled.div`
   display: flex;
   overflow-y: scroll;
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
   max-height: 75%;
   flex-direction: row;
   flex-wrap: wrap;
@@ -57,8 +57,8 @@ export const ListItemContainer = styled.div`
   display: flex;
   width: 25%;
   flex-direction: column;
-  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
+  color: ${props => (props.darkMode ? '#f9f9f9' : '#0f0f0f')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
 `
 
 export const ImgItem = styled.img`
@@ -73,4 +73,9 @@ export const ViewContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+`
+export const ItemContainer = styled.div`
+  width: 100%;
+  color: ${props => (props.darkMode ? '#f9f9f9' : '#0f0f0f')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
 `

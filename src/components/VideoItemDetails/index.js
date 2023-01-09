@@ -85,7 +85,7 @@ class videoItemDetails extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="videos-details-loader-container">
+    <div data-testid="loader" className="videos-details-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
@@ -121,7 +121,7 @@ class videoItemDetails extends Component {
             <FailContainer darkMode={darkMode}>
               <ImgFail
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
-                alt="website logo"
+                alt="failure view"
               />
               <Head>Oops! Something Went Wrong</Head>
               <p>
@@ -138,7 +138,7 @@ class videoItemDetails extends Component {
           <FailContainer darkMode={darkMode}>
             <ImgFail
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-              alt="website logo"
+              alt="failure view"
             />
             <Head>Oops! Something Went Wrong</Head>
             <p>
@@ -173,7 +173,7 @@ class videoItemDetails extends Component {
     return (
       <NxtWatchContext.Consumer>
         {value => {
-          const {onSave, savedVideos} = value
+          const {onSave, savedVideos, darkMode} = value
           const list = savedVideos.filter(each => each.id === id)
           let saved = true
           if (list.length === 0) {
@@ -194,6 +194,7 @@ class videoItemDetails extends Component {
                   </ViewContainer>
                   <div>
                     <CustomBtnLike
+                      darkMode={darkMode}
                       likeActive={likeActive}
                       type="button"
                       onClick={this.likeClicked}
@@ -202,6 +203,7 @@ class videoItemDetails extends Component {
                       <p>Like</p>
                     </CustomBtnLike>
                     <CustomBtnDislike
+                      darkMode={darkMode}
                       disLikeActive={disLikeActive}
                       type="button"
                       onClick={this.disLikeClicked}
@@ -210,6 +212,7 @@ class videoItemDetails extends Component {
                       <p>Dislike</p>
                     </CustomBtnDislike>
                     <CustomBtnSave
+                      darkMode={darkMode}
                       isSaved={saved}
                       type="button"
                       onClick={saveClicked}
@@ -254,7 +257,7 @@ class videoItemDetails extends Component {
 
   render() {
     return (
-      <>
+      <div data-testid="videoItemDetails">
         <NxtWatchContext.Consumer>
           {value => {
             const {darkMode} = value
@@ -271,7 +274,7 @@ class videoItemDetails extends Component {
             )
           }}
         </NxtWatchContext.Consumer>
-      </>
+      </div>
     )
   }
 }

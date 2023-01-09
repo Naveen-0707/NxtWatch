@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const MainContainer = styled.div`
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
-  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
+  color: ${props => (props.darkMode ? '#f9f9f9' : '#0f0f0f')};
   text-align: center;
   padding: 10px;
   height: 90vh;
@@ -15,10 +15,10 @@ export const MainContainer = styled.div`
 export const HomeContainer = styled.div`
   width: 100%;
   padding: 30px;
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
 `
 export const FailContainer = styled.div`
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
+  background-color: ${props => (props.darkMode ? '#0f0f0f' : '#f9f9f9')};
 `
 
 export const ImgFail = styled.img`
@@ -57,13 +57,19 @@ export const Img = styled.img`
   }
 `
 export const CustomBtnLike = styled.button`
-  color: ${props => (props.likeActive ? 'blue' : '#ffffff')};
+  background-color: transparent;
+  border-width: 0px;
+  color: ${props => (props.likeActive ? '#2563eb' : '#64748b')};
 `
 
 export const CustomBtnDislike = styled.button`
-  color: ${props => (props.disLikeActive ? 'blue' : '#ffffff')};
+  background-color: transparent;
+  border-width: 0px;
+  color: ${props => (props.disLikeActive ? '#2563eb' : '#64748b')};
 `
 
 export const CustomBtnSave = styled.button`
-  color: ${props => (props.isSaved ? 'blue' : '#ffffff')};
+  background-color: transparent;
+  border-width: 0px;
+  color: ${props => (props.isSaved ? '#2563eb' : '#64748b')};
 `

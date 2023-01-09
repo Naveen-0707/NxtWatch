@@ -8,6 +8,7 @@ import NxtWatchContext from '../../context/index'
 import SelectionMenu from '../SelectionMenu'
 import {
   ListItemContainer,
+  ItemContainer,
   Thumbnail,
   DetailsContainer,
   ViewContainer,
@@ -87,7 +88,7 @@ class Gaming extends Component {
             <FailContainer darkMode={darkMode}>
               <ImgFail
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
-                alt="website logo"
+                alt="failure view"
               />
               <h1>Oops! Something Went Wrong</h1>
               <p>
@@ -104,7 +105,7 @@ class Gaming extends Component {
           <FailContainer darkMode={darkMode}>
             <ImgFail
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-              alt="website logo"
+              alt="failure view"
             />
             <h1>Oops! Something Went Wrong</h1>
             <p>
@@ -121,7 +122,7 @@ class Gaming extends Component {
   )
 
   renderLoadingView = () => (
-    <div className="products-loader-container">
+    <div data-testid="loader" className="products-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
@@ -143,9 +144,12 @@ class Gaming extends Component {
                         style={{textDecoration: 'none'}}
                         to={`/videos/${id}`}
                       >
-                        <div>
+                        <ItemContainer darkMode={darkMode}>
                           <div>
-                            <Thumbnail src={thumbnailUrl} alt="thumbnail" />
+                            <Thumbnail
+                              src={thumbnailUrl}
+                              alt="video thumbnail"
+                            />
                           </div>
                           <DetailsContainer>
                             <div>
@@ -155,7 +159,7 @@ class Gaming extends Component {
                               </ViewContainer>
                             </div>
                           </DetailsContainer>
-                        </div>
+                        </ItemContainer>
                       </Link>
                     </ListItemContainer>
                   )
@@ -179,19 +183,19 @@ class Gaming extends Component {
         {value => {
           const {darkMode} = value
           return (
-            <>
+            <div data-testid="gaming">
               <Header />
               <MainContainer darkMode={darkMode}>
                 <SelectionMenu />
                 <HomeContainer darkMode={darkMode}>
-                  <BannerContainer darkMode={darkMode}>
+                  <BannerContainer data-testid="banner" darkMode={darkMode}>
                     <SiYoutubegaming />
                     <h1>Gaming</h1>
                   </BannerContainer>
                   {this.renderData()}
                 </HomeContainer>
               </MainContainer>
-            </>
+            </div>
           )
         }}
       </NxtWatchContext.Consumer>

@@ -93,7 +93,7 @@ class Trending extends Component {
             <FailContainer darkMode={darkMode}>
               <ImgFail
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
-                alt="website logo"
+                alt="failure view"
               />
               <h1>Oops! Something Went Wrong</h1>
               <p>
@@ -110,7 +110,7 @@ class Trending extends Component {
           <FailContainer darkMode={darkMode}>
             <ImgFail
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-              alt="website logo"
+              alt="failure view"
             />
             <h1>Oops! Something Went Wrong</h1>
             <p>
@@ -127,7 +127,7 @@ class Trending extends Component {
   )
 
   renderLoadingView = () => (
-    <div className="products-loader-container">
+    <div data-testid="loader" className="products-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
@@ -160,9 +160,12 @@ class Trending extends Component {
                         style={{textDecoration: 'none'}}
                         to={`/videos/${id}`}
                       >
-                        <ItemContainer>
+                        <ItemContainer darkMode={darkMode}>
                           <div>
-                            <Thumbnail src={thumbnailUrl} alt="thumbnail" />
+                            <Thumbnail
+                              src={thumbnailUrl}
+                              alt="video thumbnail"
+                            />
                           </div>
                           <DetailsContainer>
                             <div>
@@ -219,19 +222,19 @@ class Trending extends Component {
         {value => {
           const {darkMode} = value
           return (
-            <>
+            <div data-testid="trending">
               <Header />
               <MainContainer darkMode={darkMode}>
                 <SelectionMenu />
                 <HomeContainer darkMode={darkMode}>
-                  <BannerContainer darkMode={darkMode}>
+                  <BannerContainer data-testid="banner" darkMode={darkMode}>
                     <AiFillFire />
                     <h1>Trending</h1>
                   </BannerContainer>
                   {this.renderData()}
                 </HomeContainer>
               </MainContainer>
-            </>
+            </div>
           )
         }}
       </NxtWatchContext.Consumer>

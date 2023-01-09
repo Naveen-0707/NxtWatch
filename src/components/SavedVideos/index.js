@@ -7,6 +7,7 @@ import NxtWatchContext from '../../context/index'
 import SelectionMenu from '../SelectionMenu'
 import {
   ListItemContainer,
+  ItemContainer,
   FailContainer,
   ImgFail,
   Head,
@@ -32,17 +33,19 @@ class SavedVideos extends Component {
                 return (
                   <ListItemContainer key={id} darkMode={darkMode}>
                     <Link style={{textDecoration: 'none'}} to={`/videos/${id}`}>
-                      <div>
-                        <Thumbnail src={thumbnailUrl} alt="thumbnail" />
-                      </div>
-                      <DetailsContainer>
+                      <ItemContainer darkMode={darkMode}>
                         <div>
-                          <h4>{title}</h4>
-                          <ViewContainer>
-                            <p>{viewCount} Watching Worldwide</p>
-                          </ViewContainer>
+                          <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
                         </div>
-                      </DetailsContainer>
+                        <DetailsContainer>
+                          <div>
+                            <h4>{title}</h4>
+                            <ViewContainer>
+                              <p>{viewCount} Watching Worldwide</p>
+                            </ViewContainer>
+                          </div>
+                        </DetailsContainer>
+                      </ItemContainer>
                     </Link>
                   </ListItemContainer>
                 )
@@ -74,19 +77,19 @@ class SavedVideos extends Component {
         {value => {
           const {darkMode} = value
           return (
-            <>
+            <div data-testid="savedVideos">
               <Header />
               <MainContainer darkMode={darkMode}>
                 <SelectionMenu />
                 <HomeContainer darkMode={darkMode}>
-                  <BannerContainer darkMode={darkMode}>
+                  <BannerContainer data-testid="banner" darkMode={darkMode}>
                     <BiListPlus />
                     <h1>Saved Videos</h1>
                   </BannerContainer>
                   {this.renderVideos()}
                 </HomeContainer>
               </MainContainer>
-            </>
+            </div>
           )
         }}
       </NxtWatchContext.Consumer>

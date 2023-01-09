@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const ListItem = styled.li`
   display: flex;
-  color: ${props => (props.darkMode ? '#ffffff' : '#181818')};
+  color: ${props => (props.darkMode ? '#f9f9f9' : '#181818')};
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
@@ -18,7 +18,7 @@ export const MainContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 20%;
-  background-color: ${props => (props.darkMode ? '#181818' : '#ffffff')};
+  background-color: ${props => (props.darkMode ? '#181818' : '#f9f9f9')};
 `
 
 export const LogosContainer = styled.div`

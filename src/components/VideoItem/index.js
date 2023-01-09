@@ -6,6 +6,7 @@ import {
   ListItemContainer,
   Img,
   ViewContainer,
+  ItemContainer,
   Para,
   Thumbnail,
 } from './styledComponent'
@@ -25,23 +26,25 @@ const videoCard = props => {
         return (
           <ListItemContainer darkMode={darkMode}>
             <Link style={{textDecoration: 'none'}} to={`/videos/${id}`}>
-              <div>
-                <Thumbnail src={thumbnailUrl} alt="thumbnail" />
-              </div>
-              <DetailsContainer>
+              <ItemContainer darkMode={darkMode}>
                 <div>
-                  <Img src={modified.profileImageUrl} alt="profile" />
+                  <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
                 </div>
+                <DetailsContainer>
+                  <div>
+                    <Img src={modified.profileImageUrl} alt="channel logo" />
+                  </div>
 
-                <div>
-                  <Para>{title}</Para>
-                  <Para>{modified.name}</Para>
-                  <ViewContainer>
-                    <Para>{viewCount} views</Para>
-                    <Para>{formatDistanceToNow(new Date(publishedAt))}</Para>
-                  </ViewContainer>
-                </div>
-              </DetailsContainer>
+                  <div>
+                    <Para>{title}</Para>
+                    <Para>{modified.name}</Para>
+                    <ViewContainer>
+                      <Para>{viewCount} views</Para>
+                      <Para>{formatDistanceToNow(new Date(publishedAt))}</Para>
+                    </ViewContainer>
+                  </div>
+                </DetailsContainer>
+              </ItemContainer>
             </Link>
           </ListItemContainer>
         )

@@ -17,7 +17,7 @@ const NotFound = () => {
         return (
           <>
             <Header />
-            <MainContainer>
+            <MainContainer darkMode={darkMode}>
               <SelectionMenu />
               <div>
                 <div>

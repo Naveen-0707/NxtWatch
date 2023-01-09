@@ -100,7 +100,7 @@ class Home extends Component {
             <FailContainer darkMode={darkMode}>
               <ImgFail
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
-                alt="website logo"
+                alt="failure view"
               />
               <Head>Oops! Something Went Wrong</Head>
               <p>
@@ -117,7 +117,7 @@ class Home extends Component {
           <FailContainer darkMode={darkMode}>
             <ImgFail
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-              alt="website logo"
+              alt="failure view"
             />
             <Head>Oops! Something Went Wrong</Head>
             <p>
@@ -140,7 +140,7 @@ class Home extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="products-loader-container">
+    <div data-testid="loader" className="products-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
@@ -189,26 +189,33 @@ class Home extends Component {
         {value => {
           const {darkMode} = value
           return (
-            <>
+            <div data-testid="home">
               <Header />
               <MainContainer darkMode={darkMode}>
                 <SelectionMenu />
                 <HomeContainer darkMode={darkMode}>
                   {banner && (
-                    <BannerContainer darkMode={darkMode}>
+                    <BannerContainer data-testid="banner" darkMode={darkMode}>
                       <div>
                         {darkMode ? (
                           <Img
                             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
-                            alt="website logo"
+                            alt="nxt watch logo"
                           />
                         ) : (
                           <Img
                             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                            alt="website logo"
+                            alt="nxt watch logo"
                           />
                         )}
-                        <GrFormClose onClick={this.bannerClose} />
+                        <button
+                          type="button"
+                          onClick={this.bannerClose}
+                          data-testid="close"
+                        >
+                          <GrFormClose />
+                        </button>
+
                         <p>Buy Nxt Watch Premium prepaid plans with UPI</p>
                         <button type="button">GET IT NOW</button>
                       </div>
@@ -222,14 +229,18 @@ class Home extends Component {
                       onChange={this.onSearchChange}
                       placeholder="Search"
                     />
-                    <button onClick={this.submitSearch} type="button">
+                    <button
+                      data-testid="searchButton"
+                      onClick={this.submitSearch}
+                      type="button"
+                    >
                       <BsSearch />
                     </button>
                   </div>
                   {this.renderData()}
                 </HomeContainer>
               </MainContainer>
-            </>
+            </div>
           )
         }}
       </NxtWatchContext.Consumer>

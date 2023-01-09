@@ -1,9 +1,16 @@
 import {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {RiMoonFill, RiSunLine} from 'react-icons/ri'
+import Popup from 'reactjs-popup'
 import Cookies from 'js-cookie'
 import NxtWatchContext from '../../context/index'
-import {HeaderContainer, ProfileImg, MenuContainer} from './styledComponents'
+import {
+  HeaderContainer,
+  PopContainer,
+  Para,
+  ProfileImg,
+  MenuContainer,
+} from './styledComponents'
 
 class Header extends Component {
   render() {
@@ -35,7 +42,11 @@ class Header extends Component {
                 </Link>
                 <MenuContainer>
                   <div>
-                    <button type="button" onClick={onChangeMode}>
+                    <button
+                      data-testid="theme"
+                      type="button"
+                      onClick={onChangeMode}
+                    >
                       {darkMode ? <RiSunLine /> : <RiMoonFill />}
                     </button>
                   </div>
@@ -46,13 +57,35 @@ class Header extends Component {
                     />
                   </div>
                   <div>
-                    <button
-                      type="button"
-                      className="logout-desktop-btn"
-                      onClick={onClickLogout}
+                    <Popup
+                      trigger={
+                        <button type="button" className="logout-desktop-btn">
+                          Logout
+                        </button>
+                      }
+                      modal
+                      position="top left"
                     >
-                      Logout
-                    </button>
+                      {close => (
+                        <PopContainer darkMode={darkMode}>
+                          <Para>Are you sure,you want to logout?</Para>
+                          <button
+                            type="button"
+                            className="close"
+                            onClick={close}
+                          >
+                            Cancel &times;
+                          </button>
+                          <button
+                            type="button"
+                            className="logout-desktop-btn"
+                            onClick={onClickLogout}
+                          >
+                            Confirm
+                          </button>
+                        </PopContainer>
+                      )}
+                    </Popup>
                   </div>
                 </MenuContainer>
               </HeaderContainer>
